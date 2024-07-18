@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
+import { throttle } from "../utils/debounce";
 const props = defineProps(["list", "limit", "fixedHeight"]);
 
 const startIndex = ref(0);
@@ -14,11 +15,13 @@ function handleScroll(e) {
   scrollTop.value = e.target.scrollTop;
   startIndex.value = ~~(e.target.scrollTop / props.fixedHeight);
 }
+
+const scrollHandler = throttle(handleScroll)
 </script>
 
 <template>
   <h1>{{ limit }} - {{ fixedHeight }} - {{ startIndex }}</h1>
-  <div class="virtual-list-fixed" @scroll="handleScroll">
+  <div class="virtual-list-fixed" @scroll="scrollHandler">
     <div
       class="layout"
       :style="{
