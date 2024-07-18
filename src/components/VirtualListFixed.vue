@@ -3,6 +3,7 @@ import { computed, ref } from "vue";
 const props = defineProps(["list", "limit", "fixedHeight"]);
 
 const startIndex = ref(0);
+const scrollTop = ref(0);
 
 const displayedList = computed(() =>
   props.list.slice(startIndex.value, startIndex.value + props.limit)
@@ -10,9 +11,8 @@ const displayedList = computed(() =>
 const totalHeight = computed(() => props.list.length * props.fixedHeight);
 
 function handleScroll(e) {
-  console.log("scroll...", e.target.scrollTop); // 滚动了多少个像素
-  const scrollTop = e.target.scrollTop;
-  startIndex.value = ~~(scrollTop / props.fixedHeight);
+  scrollTop.value = e.target.scrollTop;
+  startIndex.value = ~~(e.target.scrollTop / props.fixedHeight);
 }
 </script>
 
@@ -25,7 +25,10 @@ function handleScroll(e) {
         height: totalHeight + 'px',
       }"
     ></div>
-    <div class="list-container" :style="{ transform: `translateY(${startIndex * fixedHeight}px)`}">
+    <div
+      class="list-container"
+      :style="{ transform: `translateY(${scrollTop}px)` }"
+    >
       <div class="list-item" v-for="item in displayedList" :key="item">
         {{ item }}
       </div>
