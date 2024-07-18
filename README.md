@@ -1,5 +1,17 @@
-# Vue 3 + Vite
+# 虚拟列表探究
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## 类型
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+- 固定高度子元素的虚拟列表
+- 不固定高度子元素的虚拟列表
+
+
+## 优化
+
+有哪些可以优化的地方？
+
+
+## 参考
+
+> 参考资料
+
